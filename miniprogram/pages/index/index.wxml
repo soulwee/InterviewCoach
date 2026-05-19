@@ -1,0 +1,93 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 顶部欢迎区域 -->
+  <view class="header-section">
+    <view class="welcome-text">
+      <text class="title">面试教练</text>
+      <text class="subtitle">智能面试准备助手</text>
+    </view>
+    <view class="header-decoration">
+      <text class="icon-text">🎯</text>
+    </view>
+  </view>
+
+  <!-- 功能入口卡片 -->
+  <view class="feature-cards">
+    <view class="feature-card" bindtap="navigateToJDInput">
+      <view class="card-icon">
+        <text class="icon">📝</text>
+      </view>
+      <view class="card-content">
+        <text class="card-title">输入JD</text>
+        <text class="card-desc">粘贴招聘要求开始面试准备</text>
+      </view>
+      <view class="card-arrow">
+        <text class="arrow-icon">›</text>
+      </view>
+    </view>
+
+    <view class="feature-card" bindtap="navigateToHistory">
+      <view class="card-icon">
+        <text class="icon">📚</text>
+      </view>
+      <view class="card-content">
+        <text class="card-title">面试历史</text>
+        <text class="card-desc">查看过往面试记录</text>
+      </view>
+      <view class="card-arrow">
+        <text class="arrow-icon">›</text>
+      </view>
+    </view>
+
+    <view class="feature-card" bindtap="showHelp">
+      <view class="card-icon">
+        <text class="icon">❓</text>
+      </view>
+      <view class="card-content">
+        <text class="card-title">使用帮助</text>
+        <text class="card-desc">了解如何使用面试教练</text>
+      </view>
+      <view class="card-arrow">
+        <text class="arrow-icon">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷功能区 -->
+  <view class="quick-actions">
+    <text class="section-title">快捷功能</text>
+    <view class="action-grid">
+      <view class="action-item" bindtap="quickStart">
+        <text class="action-icon">⚡</text>
+        <text class="action-text">快速开始</text>
+      </view>
+      <view class="action-item" bindtap="browseQuestions">
+        <text class="action-icon">📋</text>
+        <text class="action-text">题库浏览</text>
+      </view>
+      <view class="action-item" bindtap="viewStatistics">
+        <text class="action-icon">📊</text>
+        <text class="action-text">面试统计</text>
+      </view>
+      <view class="action-item" bindtap="shareApp">
+        <text class="action-icon">🔗</text>
+        <text class="action-text">分享小程序</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 面试小贴士 -->
+  <view class="tips-section">
+    <view class="tips-header">
+      <text class="tips-icon">💡</text>
+      <text class="tips-title">面试小贴士</text>
+    </view>
+    <swiper class="tips-swiper" indicator-dots autoplay circular>
+      <swiper-item wx:for="{{tips}}" wx:key="index">
+        <view class="tip-content">
+          <text>{{item}}</text>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>

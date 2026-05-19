@@ -1,0 +1,131 @@
+<!--pages/result/result.wxml-->
+<view class="container">
+  <!-- 报告头部 -->
+  <view class="report-header">
+    <view class="header-top">
+      <text class="report-icon">📊</text>
+      <text class="report-title">面试报告</text>
+    </view>
+    <text class="report-date">{{report.date}}</text>
+    <text class="report-position">{{report.position}}</text>
+  </view>
+
+  <!-- 概览统计 -->
+  <view class="overview-section">
+    <view class="overview-card">
+      <view class="overview-item">
+        <view class="item-ring">
+          <text class="ring-value">{{report.completionRate}}</text>
+          <text class="ring-label">%</text>
+        </view>
+        <text class="item-label">完成率</text>
+      </view>
+      <view class="overview-item">
+        <view class="item-value-large">
+          <text class="value">{{report.completedQuestions}}</text>
+          <text class="unit">题</text>
+        </view>
+        <text class="item-label">完成题目</text>
+      </view>
+      <view class="overview-item">
+        <view class="item-value-large">
+          <text class="value">{{report.totalTime}}</text>
+        </view>
+        <text class="item-label">总用时</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- JD解析结果 -->
+  <view class="section-card">
+    <view class="section-header">
+      <text class="section-icon">🔍</text>
+      <text class="section-title">JD解析结果</text>
+    </view>
+    
+    <view class="skill-category" wx:if="{{report.skills.languages?.length > 0}}">
+      <text class="category-label">编程语言</text>
+      <view class="skill-tags">
+        <text class="tag" wx:for="{{report.skills.languages}}" wx:key="index">{{item.name}}</text>
+      </view>
+    </view>
+    
+    <view class="skill-category" wx:if="{{report.skills.frameworks?.length > 0}}">
+      <text class="category-label">框架技术</text>
+      <view class="skill-tags">
+        <text class="tag" wx:for="{{report.skills.frameworks}}" wx:key="index">{{item.name}}</text>
+      </view>
+    </view>
+    
+    <view class="skill-category" wx:if="{{report.skills.databases?.length > 0}}">
+      <text class="category-label">数据库</text>
+      <view class="skill-tags">
+        <text class="tag" wx:for="{{report.skills.databases}}" wx:key="index">{{item.name}}</text>
+      </view>
+    </view>
+
+    <view class="skill-category" wx:if="{{report.skills.tools?.length > 0}}">
+      <text class="category-label">工具和DevOps</text>
+      <view class="skill-tags">
+        <text class="tag" wx:for="{{report.skills.tools}}" wx:key="index">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 题目详情 -->
+  <view class="section-card">
+    <view class="section-header">
+      <text class="section-icon">📝</text>
+      <text class="section-title">题目详情</text>
+    </view>
+    
+    <view class="question-list">
+      <view 
+        class="question-item"
+        wx:for="{{report.questions}}"
+        wx:key="id"
+      >
+        <view class="question-header" bindtap="toggleQuestion" data-id="{{item.id}}">
+          <view class="question-status">
+            <text class="status-icon {{item.status === 'completed' ? 'completed' : 'pending'}}">
+              {{item.status === 'completed' ? '✓' : '○'}}
+            </text>
+          </view>
+          <view class="question-info">
+            <text class="question-num">Q{{item.id}}</text>
+            <text class="question-type">{{item.category}}</text>
+          </view>
+          <text class="expand-icon {{expandedQuestions[item.id] ? 'expanded' : ''}}">›</text>
+        </view>
+        
+        <view class="question-detail {{expandedQuestions[item.id] ? 'show' : ''}}">
+          <text class="detail-question">{{item.question}}</text>
+          
+          <view class="detail-answer" wx:if="{{item.userAnswer}}">
+            <text class="answer-label">你的回答:</text>
+            <text class="answer-text">{{item.userAnswer}}</text>
+          </view>
+          
+          <view class="detail-code" wx:if="{{item.codeAnswer}}">
+            <text class="answer-label">代码:</text>
+            <view class="code-block">
+              <text>{{item.codeAnswer}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-section">
+    <button class="btn btn-outline" bindtap="shareReport">
+      <text class="btn-icon">📤</text>
+      <text>分享报告</text>
+    </button>
+    <button class="btn btn-primary" bindtap="startNewInterview">
+      <text class="btn-icon">🔄</text>
+      <text>开始新面试</text>
+    </button>
+  </view>
+</view>

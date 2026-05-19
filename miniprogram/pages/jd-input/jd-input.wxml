@@ -1,0 +1,121 @@
+<!--pages/jd-input/jd-input.wxml-->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">输入招聘要求</text>
+    <text class="page-desc">粘贴完整的JD，系统将自动解析生成面试题</text>
+  </view>
+
+  <!-- JD输入区域 -->
+  <view class="input-section">
+    <view class="input-label">
+      <text class="label-icon">📋</text>
+      <text>招聘要求(JD)</text>
+    </view>
+    <textarea 
+      class="jd-textarea"
+      placeholder="请粘贴招聘要求，例如：&#10;&#10;岗位职责：&#10;1. 负责前端技术选型和架构设计&#10;2. 带领团队完成项目开发&#10;3. 优化前端性能&#10;&#10;岗位要求：&#10;1. 本科及以上学历，计算机相关专业&#10;2. 5年以上前端开发经验&#10;3. 精通React/Vue等主流框架&#10;4. 熟悉TypeScript、Node.js&#10;5. 有大型项目架构经验"
+      value="{{jdText}}"
+      bindinput="onJDInput"
+      maxlength="5000"
+      auto-height
+    />
+    <view class="char-count">
+      <text>{{jdText.length}}/5000</text>
+    </view>
+  </view>
+
+  <!-- 快捷模板 -->
+  <view class="template-section">
+    <view class="section-header">
+      <text class="section-title">快捷模板</text>
+      <text class="section-hint">点击使用模板</text>
+    </view>
+    <view class="template-list">
+      <view 
+        class="template-item {{selectedTemplate === 'frontend' ? 'active' : ''}}"
+        bindtap="selectTemplate"
+        data-type="frontend"
+      >
+        <text class="template-icon">🎨</text>
+        <text class="template-name">前端开发</text>
+      </view>
+      <view 
+        class="template-item {{selectedTemplate === 'backend' ? 'active' : ''}}"
+        bindtap="selectTemplate"
+        data-type="backend"
+      >
+        <text class="template-icon">⚙️</text>
+        <text class="template-name">后端开发</text>
+      </view>
+      <view 
+        class="template-item {{selectedTemplate === 'fullstack' ? 'active' : ''}}"
+        bindtap="selectTemplate"
+        data-type="fullstack"
+      >
+        <text class="template-icon">🚀</text>
+        <text class="template-name">全栈开发</text>
+      </view>
+      <view 
+        class="template-item {{selectedTemplate === 'mobile' ? 'active' : ''}}"
+        bindtap="selectTemplate"
+        data-type="mobile"
+      >
+        <text class="template-icon">📱</text>
+        <text class="template-name">移动端</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 面试设置 -->
+  <view class="settings-section">
+    <view class="section-header">
+      <text class="section-title">面试设置</text>
+    </view>
+    
+    <!-- 题目数量 -->
+    <view class="setting-item">
+      <view class="setting-label">
+        <text class="setting-icon">📝</text>
+        <text>题目数量</text>
+      </view>
+      <view class="setting-control">
+        <text class="control-btn" bindtap="adjustQuestionCount" data-type="minus">-</text>
+        <text class="control-value">{{questionCount}}</text>
+        <text class="control-btn" bindtap="adjustQuestionCount" data-type="plus">+</text>
+      </view>
+    </view>
+
+    <!-- 难度级别 -->
+    <view class="setting-item">
+      <view class="setting-label">
+        <text class="setting-icon">📊</text>
+        <text>难度级别</text>
+      </view>
+      <view class="difficulty-selector">
+        <view 
+          wx:for="{{difficultyLevels}}"
+          wx:key="index"
+          class="difficulty-btn {{selectedDifficulty === item.value ? 'active' : ''}}"
+          bindtap="selectDifficulty"
+          data-value="{{item.value}}"
+        >
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 开始按钮 -->
+  <view class="action-section">
+    <button 
+      class="start-btn {{jdText.length < 50 ? 'disabled' : ''}}"
+      bindtap="startInterview"
+      disabled="{{jdText.length < 50}}"
+    >
+      <text class="btn-icon">▶</text>
+      <text>开始智能面试</text>
+    </button>
+    <text class="btn-hint" wx:if="{{jdText.length < 50}}">请输入至少50个字符的JD</text>
+  </view>
+</view>
