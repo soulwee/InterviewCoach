@@ -49,6 +49,15 @@ const KEYWORD_WEIGHTS = {
 }
 
 /**
+ * 转义正则表达式特殊字符
+ * @param {string} str - 待转义字符串
+ * @returns {string} 转义后的字符串
+ */
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+/**
  * 解析JD文本
  * @param {string} jdText - JD文本内容
  * @returns {Object} 解析结果
@@ -75,8 +84,9 @@ function parseJD(jdText) {
     const foundKeywords = []
     
     Object.keys(categoryKeywords).forEach(keyword => {
-      // 精确匹配关键词
-      const regex = new RegExp(`\\b${keyword}\\b`, 'gi')
+      // 精确匹配关键词，escapeRegExp 处理 C++, C#, Node.js 等特殊字符
+      const escapedKeyword = escapeRegExp(keyword)
+      const regex = new RegExp(`\\b${escapedKeyword}\\b`, 'gi')
       const matches = jdText.match(regex)
       
       if (matches && matches.length > 0) {

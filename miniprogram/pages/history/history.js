@@ -39,7 +39,7 @@ Page({
     const { history } = this.data
     const totalInterviews = history.length
     const totalQuestions = history.reduce((sum, item) => {
-      return sum + (item.questions?.filter(q => q.status === 'completed').length || 0)
+      return sum + (item.questions && item.questions.filter(q => q.status === 'completed').length || 0)
     }, 0)
     const totalSeconds = history.reduce((sum, item) => sum + (item.totalTime || 0), 0)
     const totalTime = this.formatDuration(totalSeconds)

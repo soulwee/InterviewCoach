@@ -84,7 +84,7 @@ Page({
     this.setData({
       report: {
         date: dateStr,
-        position: jdParsed.summary?.position || '面试练习',
+        position: jdParsed.summary && jdParsed.summary.position || '面试练习',
         completionRate,
         completedQuestions,
         totalQuestions: questions.length,

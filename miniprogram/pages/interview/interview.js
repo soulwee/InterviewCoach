@@ -309,7 +309,7 @@ Page({
       id: Date.now(),
       date: new Date().toISOString(),
       jdText: this.data.jdText,
-      jdSummary: this.data.jdParsed?.summary,
+      jdSummary: this.data.jdParsed && this.data.jdParsed.summary ? this.data.jdParsed.summary : {},
       questions: this.data.questions,
       totalTime: this.data.elapsedTime,
       completedCount: this.data.completedCount

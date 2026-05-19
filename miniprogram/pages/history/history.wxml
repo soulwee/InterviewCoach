@@ -59,13 +59,13 @@
     >
       <view class="item-header" bindtap="toggleExpand" data-id="{{item.id}}">
         <view class="item-info">
-          <text class="item-position">{{item.jdSummary?.position || '面试练习'}}</text>
+          <text class="item-position">{{item.jdSummary.position || '面试练习'}}</text>
           <text class="item-date">{{formatDate(item.date)}}</text>
         </view>
         <view class="item-meta">
           <view class="meta-badge">
             <text class="badge-icon">📝</text>
-            <text>{{item.completedCount || 0}}/{{item.questions?.length || 0}}</text>
+            <text>{{item.completedCount || 0}}/{{item.questions.length || 0}}</text>
           </view>
           <text class="expand-icon {{expandedId === item.id ? 'expanded' : ''}}">›</text>
         </view>
@@ -74,7 +74,7 @@
       <!-- 展开详情 -->
       <view class="item-detail {{expandedId === item.id ? 'show' : ''}}">
         <!-- 技能标签 -->
-        <view class="skill-tags" wx:if="{{item.jdSummary?.topSkills?.length > 0}}">
+        <view class="skill-tags" wx:if="{{item.jdSummary && item.jdSummary.topSkills && item.jdSummary.topSkills.length > 0}}">
           <text class="tag" wx:for="{{item.jdSummary.topSkills}}" wx:key="index">{{item}}</text>
         </view>
 
@@ -86,7 +86,7 @@
           </view>
           <view class="summary-item">
             <text class="summary-label">难度:</text>
-            <text class="summary-value">{{item.jdSummary?.experience?.required || 0}}+年经验</text>
+            <text class="summary-value">{{item.jdSummary.experience ? item.jdSummary.experience.required : 0}}+年经验</text>
           </view>
         </view>
 

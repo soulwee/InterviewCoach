@@ -36,15 +36,15 @@ Page({
     this.setData({
       statistics: {
         totalInterviews: history.length,
-        totalQuestions: history.reduce((sum, item) => sum + (item.questions?.length || 0), 0),
+        totalQuestions: history.reduce((sum, item) => sum + (item.questions && item.questions.length || 0), 0),
         practicedToday
       }
     })
   },
 
-  // 导航到JD输入页面
+  // 导航到JD输入页面（tabBar页面需用switchTab）
   navigateToJDInput() {
-    wx.navigateTo({
+    wx.switchTab({
       url: '/pages/jd-input/jd-input'
     })
   },

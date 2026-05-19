@@ -1,8 +1,8 @@
 {
-  "miniprogramRoot": "./miniprogram",
+  "miniprogramRoot": "miniprogram/",
   "projectname": "InterviewCoach",
   "description": "程序员面试准备小程序 - 智能解析JD生成面试题",
-  "appid": "",
+  "appid": "wx338a84af60d4857f",
   "setting": {
     "urlCheck": false,
     "es6": true,
@@ -34,10 +34,24 @@
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "compileWorklet": false,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.25.0",
   "srcMiniprogramRoot": "miniprogram/",
-  "condition": {}
+  "condition": {},
+  "simulatorPluginLibVersion": {},
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "editorSetting": {}
 }
